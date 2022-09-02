@@ -24,7 +24,7 @@ jobs:
         with:
           script: |
             github.rest.issues.createComment({
-              issue_number: stetps.pull-request-number.outputs.PR_NUMBER,
+              issue_number: ${{stetps.pull-request-number.outputs.PR_NUMBER}},
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: 'Build image: `pr-${{stetps.pull-request-number.outputs.PR_NUMBER}}.${{ steps.git-commit-hash-short.outputs.HASH_SHORT }}`'
