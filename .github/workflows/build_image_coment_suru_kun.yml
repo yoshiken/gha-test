@@ -1,6 +1,5 @@
 name: build_image_coment_suru_kun
-on:
-  status
+on: [push]
 
 jobs:
   comment:
