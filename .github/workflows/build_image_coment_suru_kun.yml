@@ -17,7 +17,12 @@ jobs:
         uses: actions/github-script@v6
         id: pull-request-number
         with:
-          script: return context.payload.pull_request.number
+          script: |
+            const pullRequest = context.payload.pull_request;
+            if (pullRequest) {
+              return pullRequest.number;
+            }
+            return context.issue.number;
           result-encoding: string
 
       - name: View context attributes
