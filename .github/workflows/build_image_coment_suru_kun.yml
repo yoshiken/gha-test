@@ -1,0 +1,28 @@
+name: build_image_coment_suru_kun
+on:
+  status
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    if: >-
+      github.event.state == 'success'
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: set git commit hash short
+        id: git-commit-hash-short
+        run: echo "::set-output name=HASH_SHORT::$(git rev-parse --short HEAD)"
+
+      - name: send comment
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Build image: `pr-${{context.issue.number}}.${{ steps.git-commit-hash-short.outputs.HASH_SHORT }}`'
+            })
