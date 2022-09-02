@@ -14,16 +14,8 @@ jobs:
         run: echo "::set-output name=HASH_SHORT::$(git rev-parse --short HEAD)"
 
       - name: set pull request number
-        uses: actions/github-script@v6
         id: pull-request-number
-        with:
-          script: |
-            const pullRequest = context.payload.pull_request;
-            if (pullRequest) {
-              return pullRequest.number;
-            }
-            return context.issue.number;
-          result-encoding: string
+        run: echo "::set-output name=PR_NUMBER::$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")"
 
       - name: View context attributes
         uses: actions/github-script@v6
