@@ -19,6 +19,11 @@ jobs:
         id: pull-request-number
         run: echo "::set-output name=PR_NUMBER::$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")"
 
+      - name: View context attributes
+        uses: actions/github-script@v6
+        with:
+          script: console.log(context)
+
       - name: send comment
         uses: actions/github-script@v6
         with:
