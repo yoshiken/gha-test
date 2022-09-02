@@ -4,7 +4,6 @@ on: [push]
 jobs:
   comment:
     runs-on: ubuntu-latest
-    if: github.event.state == 'success'
     steps:
       - uses: actions/checkout@v2
         with:
