@@ -1,14 +1,13 @@
 name: build_image_coment_suru_kun
-on:
-  status
+on: pull_request
 
 jobs:
   comment:
     runs-on: ubuntu-latest
-    if: github.event.state == 'success'
     steps:
       - uses: actions/checkout@v2
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
 
       - name: set git commit hash short
