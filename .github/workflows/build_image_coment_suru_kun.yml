@@ -1,5 +1,10 @@
 name: build_image_coment_suru_kun
-on: pull_request
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - develop
 
 jobs:
   comment:
